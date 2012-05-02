@@ -21,7 +21,7 @@ class Tree:
   def insert(self, nodeData, root):
     if root == None:
       self.root = TreeNode(nodeData)
-      print 'inserted at root: ' + str(self.root.data)
+      print 'Root: ' + str(self.root.data)
     else:
       if nodeData <= root.data:
         if root.left == None:
@@ -34,15 +34,12 @@ class Tree:
         else:
           self.insert(nodeData, root.right)
 
-  def depthFirst(self):
-    if self.root == None:
-      print 'x';
-    treeDepth = self.depth(self.root);
-    print 'tree depth is ' + str(treeDepth)
-    spaces = '';
-    for i in range(0,treeDepth):
-      spaces += ' ';
-    print spaces + str(self.root.data)  
+  def depthFirst(self, node):
+    print str(node.data)
+    if node.left != None:
+      self.depthFirst(node.left)
+    if node.right != None:
+      self.depthFirst(node.right)
 
   def depth(self, node):
     lcount = 0;
@@ -56,9 +53,6 @@ class Tree:
     return 1 + max(rcount, lcount)      
 
   def breadthFirst(self, node):
-    if self.root == None:
-      print 'x'
-    print 'depth is ' + str(self.depth(self.root))
     q = Queue()
     q.put(self.root)
     while not q.empty():
@@ -73,6 +67,10 @@ tree = Tree()
 for n in numbers:
   tree.insert(n, tree.root)
 
+print 'Depth: ' + str(tree.depth(tree.root))
+print 'Depth-first (preorder) traversal: '
+tree.depthFirst(tree.root)
+print 'Breadth-first traversal: '
 tree.breadthFirst(tree.root)
 #tree.printTree()
 #print tree.depth(tree.root);
