@@ -1,16 +1,17 @@
+
+def isEven(num):
+  return num % 2 == 0
+
 max = 4000000
 sum = 0;
 i = 1
 ii = 1
 while True:
-  i = i + ii
-  if i > max: 
+  if ii > max: 
     break
-  if i % 2 == 0:
-    sum += i
-  ii = ii + i
-  if ii > max:
-    break 
-  if ii % 2 == 0:
+  if isEven(ii):
     sum += ii
+  tmp = ii
+  ii = i + ii
+  i = tmp
 print sum
